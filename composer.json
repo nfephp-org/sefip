@@ -1,0 +1,47 @@
+{
+    "name": "nfephp-org/sefip",
+    "type": "library",
+    "description": "API para geração SEFIP.RE.",
+    "keywords": ["Folha","SEFIP","sped"],
+    "homepage": "https://github.com/nfephp-org/sefip",
+    "license": ["LGPL-3.0-or-later", "GPL-3.0-or-later", "MIT"],
+    "authors": [
+        {
+            "name": "Roberto L. Machado",
+            "email": "linux.rlm@gmail.com.br",
+            "homepage": "http://www.nfephp.org",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">= 7.0",
+        "nfephp-org/sped-common": "^5.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.4",
+        "phpunit/phpunit": "^8.1",
+        "phpstan/phpstan": "^0.11.5"
+    },
+    "autoload": {
+        "psr-4": {
+          "NFePHP\\Sefip\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NFePHP\\Sefip\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit -c phpunit.xml.dist",
+        "phpcbf": "vendor/bin/phpcbf --standard=psr2 src",
+        "phpcs": "vendor/bin/phpcs --standard=psr2 src",
+        "phpstan": "vendor/bin/phpstan analyse src/ --level 1"
+    },
+    "extra": {
+        "branch-alias": {
+            "v1.0": "1.0-dev"
+        }
+    },
+    "minimum-stability": "stable"
+}
