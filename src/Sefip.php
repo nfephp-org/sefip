@@ -24,12 +24,12 @@ class Sefip
             "tpremessa" => ['integer', 1, true, '1|3'],
             "tpinscricao" => ['integer', 1, true, '1|2|3'],
             "nrinscricao" =>  ['integer', 14, true, ''],
-            "razaosocial" => ['string', 30, true, '([A-Z0-9])\1{2}'],
-            "contato" => ['alpha', 20, true, '([A-Z])\1{2}'],
-            "endereco" => ['string', 50, true, '([A-Z0-9])\1{2}'],
-            "bairro" => ['string', 20, true, '([A-Z0-9])\1{2}'],
+            "razaosocial" => ['string', 30, true, ''],
+            "contato" => ['alpha', 20, true, ''],
+            "endereco" => ['string', 50, true, ''],
+            "bairro" => ['string', 20, true, ''],
             "cep" => ['integer', 8, true, ''],
-            "cidade" => ['string', 20, true, '([A-Z0-9])\1{2}'], 
+            "cidade" => ['string', 20, true, ''], 
             "uf" => ['alpha', 2, true, ''],
             "telefone" => ['integer', 12, true, ''],
             "email" => ['string', 60, false, ''],
@@ -44,7 +44,6 @@ class Sefip
             "tipoinscfornecedorfolha" => ['integer', 1, true, ''],
             "inscfornecfolha" => ['integer', 14, true, ''],
         ];
-        
         $header = '00' . str_repeat(' ', 51);
         $footer = str_repeat(' ', 18) . '*';
         $field = $this->build("Registro 00", $header, $parameters, $std);
@@ -93,8 +92,16 @@ class Sefip
     
     public function register12(\stdClass $std)
     {
+        $parameters = [
+            "tpinscricao" => ['integer', 1, true, '1|2'],
+            "nrinscricao" =>  ['integer', 14, true, ''],
+            "zeros" => ['integer', 36, false, ''],
+        ];    
         $header = '12';
-        $this->collect[] = $field;
+        $footer = str_repeat('0', 45) . str_repeat(' ', 6) . '*';
+        $field = $this->build("Registro 12", $header, $parameters, $std);
+        $this->collect[] = $field.$footer;
+        return $field.$footer;
     }
     
     public function register13(\stdClass $std)
